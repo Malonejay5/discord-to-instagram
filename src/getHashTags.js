@@ -1,6 +1,6 @@
 const got = require('got')
 const fs = require('fs')
-
+ //////// STILL WIP /////////////////
 
 let HashArray = []
 

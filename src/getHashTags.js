@@ -1,8 +1,9 @@
 const got = require('got')
 const fs = require('fs')
- //////// STILL WIP /////////////////
+const { get } = require('request')
 
-let HashArray = []
+/// STILL WIP ////
+const HashArray = []
 
 let getHash = async (tag) => {
     
@@ -30,29 +31,38 @@ let getHash = async (tag) => {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
                     }
     })
-    .then((res) => {
+    .then(async (res) => {
         //console.log(res.body)
         let jsonBody = JSON.parse(res.body).results
         for (let i = 0; i < jsonBody.length; i++){
             let responseTag = jsonBody[i]['tag']
             HashArray.push(`#${responseTag}`)
+            
         }
         //console.log(HashArray)
+        //console.log('hasharray',HashArray)
         return HashArray
     
     })
-    .catch((err) => {
+    
+    .catch(async (err) => {
         return new Error('ERROR Please Try Again With A Different Tag...')
     })
+    
+    
 }
 
 //getHash('tigertattoo')
 
-let testErr = async () => {
-    var hashs = await getHash('tattoo')
-    //console.log(hashs)
-    console.log(HashArray)
+let testErr = async (tags) => {
+    const hashTags = await getHash(tags)
+    return HashArray
+
 }
 
-//testErr()
-exports.getHash = getHash
+let testHash = async (tags) => {
+    let hashtags = await testErr(tags)
+    return hashtags
+}
+
+exports.getHash = testHash

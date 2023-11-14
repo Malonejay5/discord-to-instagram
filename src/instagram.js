@@ -6,6 +6,7 @@
 const {IgApiClient} = require('instagram-private-api')
 const {get} = require('request-promise')
 const fs = require('fs')
+const hashTagGen = require('./getHashTags')
 require('dotenv').config()
 
 
@@ -49,8 +50,10 @@ let checkLogin = async () => {
 
 
 
-let postToInsta = async (imgUrl, postCaption, customHashTags) => {
-    //only needed for password change or first log in 
+let postToInsta = async (imgUrl, postCaption, keyWord) => {
+
+    let hash = await hashTagGen.getHashTags(keyWord)
+    
     await loginInsta()
     
    
@@ -61,7 +64,7 @@ let postToInsta = async (imgUrl, postCaption, customHashTags) => {
 
     await ig.publish.photo({
         file: imgBuffer,
-        caption: postCaption + '\n' + ' ' + customHashTags + hashTagsNoComma
+        caption: postCaption + '\n' + hash.toString().replaceAll(',', ' ') + ' ' + hashTagsNoComma
     })
 
 

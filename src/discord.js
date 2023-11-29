@@ -8,7 +8,7 @@ const hashTagGen = require('./hashtagGen.js')
 const log = require('./logging')
 require('dotenv').config()
 
-let token = process.env.TEST_TOKEN
+let token = process.env.TOKEN
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]})
 

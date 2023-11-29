@@ -3,7 +3,7 @@ const instaPost = require('../instagram')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('post')
+        .setName('test_post')
         .setDescription('Automated Instagram Posting')
         .addSubcommand(subcommand => {
             return subcommand
@@ -13,16 +13,19 @@ module.exports = {
                 return option
                 .setName('attachment-option')
                 .setDescription('attachment description')
+                .setRequired(true)
             })
             .addStringOption(captionCommand => {
                 return captionCommand
                 .setName('caption')
                 .setDescription('add caption')
+                .setRequired(true)
             })
             .addStringOption(option => {
                 return option
-                .setName('hashtags')
-                .setDescription('Add Custom Hashtags')
+                .setName('hashtag_keywords')
+                .setDescription('Generate Hashtags based off a Keyword')
+                .setRequired(true)
             })
         }),
         

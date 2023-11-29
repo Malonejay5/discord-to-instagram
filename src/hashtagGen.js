@@ -17,7 +17,7 @@ let getHash1 = async (keyWord) => {
       let jsonParse = JSON.parse(jsonData).data;
       let hashTags = jsonParse['hashtags'];
       for (let i = 0; i < hashTags.length; i++) {
-          if(i < 15){
+          if(i < 11){
             hashTagArray.push(`#${hashTags[i]['hashtag']}`);
           }
          
